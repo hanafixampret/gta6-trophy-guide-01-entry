@@ -19,7 +19,8 @@ node serve.ts
 ```
 
 Then open <http://localhost:8080>. It works with the network off: the only
-thing the app loads is its own `app/data/trophies.json`.
+things the app loads are its own `app/data/trophies.json` and
+`app/data/steps.json`.
 
 ## What is in it
 
@@ -29,6 +30,10 @@ thing the app loads is its own `app/data/trophies.json`.
   description, grade, points and hidden flag, plus kind, missable / one-off
   flags, progress targets, a guide in our own words, and cited sources
   (Exophase, PSNProfiles, and PowerPyx where its facts are used).
+- `app/data/steps.json` — the cited steps behind every guide: 189 numbered
+  steps in total (PowerPyx 181, Exophase 7, PSNProfiles 1), each carrying its
+  source beside it, plus each trophy's roadmap stage, chapter, mission, "when"
+  line, and Exophase earned rate as of 20 November 2026. Checked 20 Nov 2026.
 - `screenshots/` — four real renders of the app in a browser (see
   `shots.json` for which view each one shows).
 - `main.ts` — hands the entry in: copies `app/` and `screenshots/` to
@@ -55,6 +60,14 @@ Nine more hidden trophies read like single scenes (a cocktail on Ocean
 Beach, a showroom smash, a bowling alley) and are flagged as one-off moments
 to do when they appear; PowerPyx lists them as not yet pinned down, and the
 guide says so rather than claiming a step nobody has checked.
+
+Every guide is now numbered steps with the source named beside each step —
+189 cited steps across the 55 trophies, with the audit strip in the header
+("55/55 guides cited · 189 cited steps · 3 sources, checked 20 Nov 2026")
+and a "Sources & audit" tab carrying the source matrix and the four places
+where the sources disagree (the final mission's chapter, whether the Chapter 1
+meditation is required, the WAiNK count, and the method for "Bad Luck, I
+Guess"), each shown both ways with the call this guide makes.
 
 ## Sources
 

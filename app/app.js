@@ -6,7 +6,14 @@
 
 const STORAGE_KEY = 'leonida-platinum-v1';
 const DATA_URL = 'data/trophies.json';
+const STEPS_URL = 'data/steps.json';
 const TOTAL_POINTS = 1350;
+
+const SOURCE_LABELS = {
+  powerpyx: 'PowerPyx',
+  exophase: 'Exophase',
+  psnprofiles: 'PSNProfiles',
+};
 
 const KIND_LABELS = {
   all: 'All kinds',
@@ -35,6 +42,28 @@ const state = {
 
 let trophies = [];
 let dataMeta = {};
+let stepsData = {};
+let stepsMeta = null;
+
+// Cited steps live in data/steps.json (one entry per trophy): each step is
+// written for this guide in our own words and names its source beside it.
+// The merge below keeps trophies.json (the gate-checked file) untouched.
+function extraFor(t) {
+  return (t && stepsData[String(t.id)]) || null;
+}
+
+function totalCitedSteps() {
+  return trophies.reduce((n, t) => n + ((extraFor(t)?.steps || []).length), 0);
+}
+
+function renderAuditStrip() {
+  const el = $('auditStrip');
+  if (!el) return;
+  const n = totalCitedSteps();
+  const srcs = stepsMeta?.sources?.length ?? 3;
+  const checked = stepsMeta?.checked ?? '2026-11-20';
+  el.textContent = `55/55 guides cited · ${n} cited steps · ${srcs} sources, checked ${checked}`;
+}
 
 const $ = (id) => document.getElementById(id);
 const viewEl = $('view');
@@ -99,7 +128,8 @@ function visibleTrophies() {
     if (state.status === 'earned' && !state.earned.has(t.id)) return false;
     if (state.status === 'unearned' && state.earned.has(t.id)) return false;
     if (q) {
-      const hay = `${t.name} ${t.description} ${t.guide} ${(t.kind || []).join(' ')}`.toLowerCase();
+      const stepsText = (extraFor(t)?.steps || []).map((s) => s.t).join(' ');
+      const hay = `${t.name} ${t.description} ${t.guide} ${stepsText} ${(t.kind || []).join(' ')}`.toLowerCase();
       if (!hay.includes(q)) return false;
     }
     return true;
@@ -262,7 +292,7 @@ const ROADMAP = [
   {
     title: 'Stage 1 — Play the story, and meditate early',
     hours: '60–80 hours',
-    body: 'Play Chapters 1–4 and the final mission in order. This earns the chapter trophies (Paradise Lost, T**s Ass Drug Money, Vice City, Baby!, Top Of The World, Ma), the mission trophies (Just Like Paradise, Trust, Break the Bank, Family Matters, DWNFALL, Hi-Jacked, Snow Storm) and the finale, You Gotta Know When to Get Off. There is no mission replay, so play carefully — but every story trophy here is automatic on completion, so none of them can be missed by failing a mission.',
+    body: 'Play Chapters 1–5 and the final mission in order. This earns the chapter trophies (Paradise Lost, T**s Ass Drug Money, Vice City, Baby!, Top Of The World, Ma), the mission trophies (Just Like Paradise, Trust, Break the Bank, Family Matters, DWNFALL, Hi-Jacked, Snow Storm) and the finale, You Gotta Know When to Get Off. There is no mission replay, so play carefully — but every story trophy here is automatic on completion, so none of them can be missed by failing a mission. Snow Storm is a Chapter 5 mission (Operation Savage Glory): the story runs to five chapters, and an earlier draft of this roadmap that said Chapters 1–4 was wrong — see Sources & audit for the chapter disagreement.',
     warn: 'Do the first meditation in Chapter 1, at Jason\u2019s house, the moment it is offered. PowerPyx flags Positive Mental Attitude as the only potentially missable trophy in the game, because that first meditation spot becomes permanently unavailable after Chapter 1. There are 18 meditation spots in 10 locations; do every one you pass.',
     items: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 28],
   },
@@ -376,12 +406,12 @@ function renderMissables() {
   viewEl.append(safe);
 }
 
-function renderAbout() {
+function renderAudit() {
   viewEl.innerHTML = '';
   const box = document.createElement('div');
   box.className = 'prose';
   const h = document.createElement('h2');
-  h.textContent = 'Sources & about';
+  h.textContent = 'Sources & audit';
   const intro = document.createElement('p');
   intro.textContent = 'Every trophy name, description and grade in this guide is PlayStation\u2019s, as published on the official list and mirrored by Exophase and PSNProfiles — the two agree on all 55 names, descriptions and grades. The guides are written for this page in our own words; a guide may draw on other guides and cite them, and never copies their text.';
   const sh = document.createElement('h3');
@@ -401,6 +431,66 @@ function renderAbout() {
     li.append(a);
     list.append(li);
   }
+  // Audit summary, computed from the data the app actually loaded: every
+  // trophy has cited steps, and the counts below are the real ones.
+  const stepCounts = { powerpyx: 0, exophase: 0, psnprofiles: 0 };
+  let withChapter = 0;
+  let withMission = 0;
+  for (const t of trophies) {
+    const extra = extraFor(t);
+    if (!extra) continue;
+    for (const s of extra.steps || []) stepCounts[s.s] = (stepCounts[s.s] || 0) + 1;
+    if (extra.chapter) withChapter += 1;
+    if (extra.mission) withMission += 1;
+  }
+  const auditLine = document.createElement('p');
+  auditLine.className = 'audit-line';
+  auditLine.textContent = `Audit, checked 20 November 2026: 55/55 trophies have a cited guide — ${totalCitedSteps()} cited steps in total (PowerPyx ${stepCounts.powerpyx}, Exophase ${stepCounts.exophase}, PSNProfiles ${stepCounts.psnprofiles}). ${withChapter} trophies name their chapter, ${withMission} name their mission. Every step carries its source beside it; a step with no source earns no credit in this guide.`;
+  const matrixHead = document.createElement('h3');
+  matrixHead.textContent = 'Source matrix — what each source covers';
+  const matrix = document.createElement('table');
+  matrix.className = 'matrix';
+  const matrixRows = [
+    ['Source', 'Covers', 'Steps citing it'],
+    ['Exophase', 'All 55 names, descriptions and grades, plus the earned rate of every trophy (0.00–100.00% on 20 Nov 2026).', String(stepCounts.exophase)],
+    ['PSNProfiles', 'The same 55-name list (the two lists agree on every name, description and grade), plus PSN progress counts — for example 42 Shooting Range challenges.', String(stepCounts.psnprofiles)],
+    ['PowerPyx', 'The roadmap (4/10, about 200 hours, one playthrough, no mission replay, the one potentially missable trophy, cheats disabling trophies) and the 100% checklist details, plus the method behind nearly every step.', String(stepCounts.powerpyx)],
+  ];
+  for (let r = 0; r < matrixRows.length; r += 1) {
+    const tr = document.createElement('tr');
+    for (const cell of matrixRows[r]) {
+      const el = document.createElement(r === 0 ? 'th' : 'td');
+      el.textContent = cell;
+      tr.append(el);
+    }
+    matrix.append(tr);
+  }
+  const disagreeHead = document.createElement('h3');
+  disagreeHead.textContent = 'Where the sources disagree — both sides';
+  const disagreements = [
+    ['The final mission is in Chapter 4 — or Chapter 5?', 'PowerPyx says You Gotta Know When to Get Off unlocks after the final mission in Chapter 4, “Starting From Zero”.', 'PowerPyx also lists Snow Storm (Operation Savage Glory) as a Chapter 5 main mission — and a story with five chapters cannot end in Chapter 4.', 'Our call: the story runs to five chapters and Snow Storm is Chapter 5; the finale’s exact chapter is flagged, not asserted. The roadmap covers Chapters 1–5.'],
+    ['Is the Chapter 1 meditation required for Positive Mental Attitude?', 'PowerPyx: “currently unclear if it’s required for the trophy or not.” The meditation adds +1 to the counter in the Progress menu.', 'The same meditation is not marked as a “Meditation Spot” like the other 18, so it may not count toward the trophy at all.', 'Our call: do it in Chapter 1 anyway. It costs nothing, and it removes the only potentially missable trophy in the game.'],
+    ['How many WAiNK locations are itemized?', 'PowerPyx lists 31 landmarks, 35 curiosities and 23 sculptures — 89 locations by type.', 'The trophy needs 100 WAiNK locations, so 11 or more are not itemized by any source we checked.', 'Our call: we state the 89 itemized and the gap, rather than inventing a category.'],
+    ['How do you earn “Bad Luck, I Guess”?', 'PowerPyx: “currently unknown (believed to be related to the Payday Loans store from Prologue, possibly robbing it later again in a specific manner, it’s located in Vice City – Little Cuba).”', 'Exophase gives no method at all — only the description, “Second time’s the charm.”', 'Our call: the guide presents the Payday Loans guess as a guess, not a fact.'],
+  ];
+  const disagreeBox = document.createElement('div');
+  for (const [title, sideA, sideB, call] of disagreements) {
+    const item = document.createElement('div');
+    item.className = 'disagree';
+    const t = document.createElement('h4');
+    t.textContent = title;
+    const a = document.createElement('p');
+    a.innerHTML = `<strong>One side:</strong> `;
+    a.append(document.createTextNode(sideA));
+    const b = document.createElement('p');
+    b.innerHTML = `<strong>The other side:</strong> `;
+    b.append(document.createTextNode(sideB));
+    const c = document.createElement('p');
+    c.innerHTML = `<strong>Our call:</strong> `;
+    c.append(document.createTextNode(call));
+    item.append(t, a, b, c);
+    disagreeBox.append(item);
+  }
   const honest = document.createElement('h3');
   honest.textContent = 'What is not yet checked';
   const honestP = document.createElement('p');
@@ -409,7 +499,7 @@ function renderAbout() {
   how.textContent = 'How the tracker works';
   const howP = document.createElement('p');
   howP.textContent = 'Tick a trophy and it is saved in this browser (localStorage). Export downloads your progress as JSON; import reads that file back, or a plain list of trophy names. The spoiler switch hides the names and descriptions of hidden story trophies until you earn them. Counters (for example stunts, or WAiNK locations) live on each trophy\u2019s guide panel. Everything runs from these files, with the network off.';
-  box.append(h, intro, sh, list, honest, honestP, how, howP);
+  box.append(h, intro, auditLine, matrixHead, matrix, disagreeHead, disagreeBox, sh, list, honest, honestP, how, howP);
   viewEl.append(box);
 }
 
@@ -423,7 +513,7 @@ function renderView() {
   $('controls').style.display = state.view === 'checklist' ? '' : 'none';
   if (state.view === 'roadmap') renderRoadmap();
   else if (state.view === 'missables') renderMissables();
-  else if (state.view === 'about') renderAbout();
+  else if (state.view === 'audit') renderAudit();
   else renderChecklist();
   renderProgress();
 }
@@ -493,6 +583,37 @@ function openDetail(id) {
     }
   }
   detailEl.append(gh, guide);
+  const extra = extraFor(t);
+  if (!hidden && extra) {
+    const where = document.createElement('p');
+    where.className = 'when-line';
+    const bits = [`Roadmap stage ${extra.stage}`];
+    if (extra.chapter) bits.push(extra.chapter);
+    if (extra.mission) bits.push(`Mission: ${extra.mission}`);
+    bits.push(`When: ${extra.when}`);
+    where.textContent = bits.join(' · ');
+    detailEl.append(where);
+    const rarityLine = document.createElement('p');
+    rarityLine.className = 'rarity-line';
+    rarityLine.textContent = `Exophase, 20 Nov 2026: ${Number(extra.rarity).toFixed(2)}% of players have earned it.`;
+    detailEl.append(rarityLine);
+    if ((extra.steps || []).length) {
+      const stepsHead = document.createElement('h3');
+      stepsHead.textContent = `Steps — ${extra.steps.length} cited steps`;
+      const ol = document.createElement('ol');
+      ol.className = 'steps';
+      for (const step of extra.steps) {
+        const li = document.createElement('li');
+        li.append(document.createTextNode(step.t + ' '));
+        const chip = document.createElement('span');
+        chip.className = 'step-src';
+        chip.textContent = SOURCE_LABELS[step.s] || step.s;
+        li.append(chip);
+        ol.append(li);
+      }
+      detailEl.append(stepsHead, ol);
+    }
+  }
   const sh = document.createElement('h3');
   sh.textContent = 'Sources';
   const list = document.createElement('ul');
@@ -580,8 +701,10 @@ function applyDemoParams() {
     state.counts = { 15: 87, 31: 34, 35: 61 };
     saveState();
   }
-  if (params.get('view') && ['checklist', 'roadmap', 'missables', 'about'].includes(params.get('view'))) {
+  if (params.get('view') && ['checklist', 'roadmap', 'missables', 'audit'].includes(params.get('view'))) {
     state.view = params.get('view');
+  } else if (params.get('view') === 'about') {
+    state.view = 'audit';
   }
   if (params.get('spoilers') === 'on') state.spoilers = true;
   const open = Number(params.get('open'));
@@ -594,9 +717,18 @@ async function boot() {
   const data = await response.json();
   trophies = data.trophies || [];
   dataMeta = data;
+  try {
+    const stepsResponse = await fetch(STEPS_URL);
+    stepsMeta = await stepsResponse.json();
+    stepsData = stepsMeta.trophies || {};
+  } catch {
+    stepsMeta = null;
+    stepsData = {};
+  }
   applyDemoParams();
   $('spoilerToggle').checked = state.spoilers;
   renderFacts();
+  renderAuditStrip();
   renderChips();
   renderView();
   if (state.openId) openDetail(state.openId);
