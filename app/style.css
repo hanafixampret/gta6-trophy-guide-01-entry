@@ -309,6 +309,36 @@ main { padding: 18px 22px 30px; max-width: 1180px; }
 }
 .disagree h4 { margin: 0 0 6px; font-size: 16px; }
 .disagree p { margin: 5px 0; font-size: 14px; }
+.disagree.resolved { border-color: rgba(126, 201, 143, .55); }
+.resolved-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  border: 1px solid rgba(126, 201, 143, .55);
+  border-radius: 99px;
+  padding: 1px 8px;
+  margin-left: 6px;
+  color: #cfe8d4;
+  background: rgba(126, 201, 143, .08);
+  vertical-align: middle;
+}
+.chapter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 14px 0; }
+.chapter-cell { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; }
+.chapter-cell h3 { margin: 0 0 8px; font-size: 15px; }
+.chapter-cell p { margin: 4px 0; color: var(--muted); font-size: 13px; }
+.chapter-trophy {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 4px 0;
+  color: #ffb59f;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 
 .detail .guide-text { white-space: pre-line; }
 .detail .guide-text p { margin: 0 0 10px; }

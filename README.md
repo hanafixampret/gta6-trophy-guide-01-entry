@@ -29,11 +29,13 @@ things the app loads are its own `app/data/trophies.json` and
 - `app/data/trophies.json` — all 55 trophies with the official name,
   description, grade, points and hidden flag, plus kind, missable / one-off
   flags, progress targets, a guide in our own words, and cited sources
-  (Exophase, PSNProfiles, and PowerPyx where its facts are used).
-- `app/data/steps.json` — the cited steps behind every guide: 189 numbered
-  steps in total (PowerPyx 181, Exophase 7, PSNProfiles 1), each carrying its
-  source beside it, plus each trophy's roadmap stage, chapter, mission, "when"
-  line, and Exophase earned rate as of 20 November 2026. Checked 20 Nov 2026.
+  (Exophase, PSNProfiles, PowerPyx, KeenGamer and Push Square where their
+  facts are used).
+- `app/data/steps.json` — the cited steps behind every guide: 236 numbered
+  steps in total (PowerPyx 182, KeenGamer 34, Push Square 13, Exophase 6,
+  PSNProfiles 1), each carrying its source beside it, plus each trophy's
+  roadmap stage, chapter, mission, "when" line, and Exophase earned rate as
+  of 20 November 2026. Checked 21 Nov 2026.
 - `screenshots/` — four real renders of the app in a browser (see
   `shots.json` for which view each one shows).
 - `main.ts` — hands the entry in: copies `app/` and `screenshots/` to
@@ -48,7 +50,7 @@ mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 
 55 trophies: 1 platinum, 2 gold, 6 silver, 46 bronze; 28 hidden on PSN; 0
 online — all offline, single-player, 1,350 points. PowerPyx rates the set
-4/10 and about 200 hours, one playthrough, and flags exactly one trophy as
+4/10 and about 200 hours (Push Square: up to 300 hours), one playthrough, and flags exactly one trophy as
 potentially missable: **Positive Mental Attitude**, whose first meditation,
 at Jason's house in Chapter 1, is offered once. There is no mission replay,
 and cheats disable trophies and saving — so the roadmap does the story first
@@ -56,18 +58,22 @@ and cheats disable trophies and saving — so the roadmap does the story first
 strands, then collectibles and activities, then the 100% checklist
 (**A Long Road**) and the platinum, **Vice Got a Price!**.
 
-Nine more hidden trophies read like single scenes (a cocktail on Ocean
+Seven hidden trophies read like single scenes (a cocktail on Ocean
 Beach, a showroom smash, a bowling alley) and are flagged as one-off moments
-to do when they appear; PowerPyx lists them as not yet pinned down, and the
-guide says so rather than claiming a step nobody has checked.
+to do when they appear; their methods are now verified from PowerPyx,
+KeenGamer and Push Square, including "Bad Luck, I Guess", whose method was
+unknown in v2. Three trophies v2 flagged as one-off moments (Personal Best,
+Actions Speak Louder, Ten Pin) are grinds, not moments, and are no longer
+flagged that way.
 
 Every guide is now numbered steps with the source named beside each step —
-189 cited steps across the 55 trophies, with the audit strip in the header
-("55/55 guides cited · 189 cited steps · 3 sources, checked 20 Nov 2026")
-and a "Sources & audit" tab carrying the source matrix and the four places
+236 cited steps across the 55 trophies, with the audit strip in the header
+("55/55 guides cited · 236 cited steps · 5 sources, checked 21 Nov 2026")
+and a "Sources & audit" tab carrying the source matrix and the six places
 where the sources disagree (the final mission's chapter, whether the Chapter 1
-meditation is required, the WAiNK count, and the method for "Bad Luck, I
-Guess"), each shown both ways with the call this guide makes.
+meditation is required, the WAiNK count, the method for "Bad Luck, I
+Guess", the shooting-range locations, and the hours to platinum), each shown
+both ways with the call this guide makes — two of them resolved in v3.
 
 ## Sources
 
@@ -77,6 +83,10 @@ Guess"), each shown both ways with the call this guide makes.
   <https://psnprofiles.com/trophies/43531-grand-theft-auto-vi>
 - PowerPyx — GTA 6 Trophy Guide & Roadmap:
   <https://www.powerpyx.com/gta-6-grand-theft-auto-vi-trophy-guide-roadmap/>
+- KeenGamer — GTA 6 Trophy Guide & Platinum Roadmap:
+  <https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/>
+- Push Square — GTA 6 Trophy Guide and Roadmap:
+  <https://www.pushsquare.com/guides/gta-6-trophy-guide-and-roadmap>
 
 Names, descriptions and grades are PlayStation's. Guide text is written for
 this page in our own words and never copies another guide. This is an

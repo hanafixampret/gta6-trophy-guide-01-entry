@@ -5,9 +5,13 @@
 // hands it in: it copies app/ and screenshots/ from beside this file to /output
 // and writes /output/dossier.json with the vendored make.fun library, exactly
 // as the kit's starter does. vendor/makefun-frontend.ts is the kit's copy,
-// unchanged. The cited steps live in data/steps.json (189 numbered steps, each
-// naming its source); the hand-in refuses to run without it, because a guide
-// with no steps is not the entry this program claims to hand in.
+// unchanged. The cited steps live in data/steps.json (236 numbered steps, each
+// naming its source — PowerPyx 182, KeenGamer 34, Push Square 13,
+// Exophase 6, PSNProfiles 1); the hand-in refuses to run without them,
+// because a guide with no steps is not the entry this program claims
+// to hand in. It also refuses a hand-in whose steps fail the guard in
+// validateData below: every trophy needs at least one cited step, and
+// every step must name a source the data file itself lists.
 //
 // Never delete the output directory here: the grader's /output is a mount
 // point, so only mkdirSync it (rmSync would throw EBUSY). Outside the grader,
@@ -15,7 +19,7 @@
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 // Serve the guide locally with `node serve.ts` (http://localhost:8080).
 
-import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildDossier } from './vendor/makefun-frontend.ts';
@@ -23,7 +27,7 @@ import { buildDossier } from './vendor/makefun-frontend.ts';
 const here = fileURLToPath(new URL('.', import.meta.url));
 const out = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 
-// The v2 guide is nothing without its cited steps: refuse the hand-in rather
+// The v3 guide is nothing without its cited steps: refuse the hand-in rather
 // than shipping a checklist whose detail panels come up empty.
 if (!existsSync(join(here, 'app', 'data', 'steps.json'))) {
   throw new Error('app/data/steps.json is missing: the cited steps are part of this entry');
@@ -31,6 +35,36 @@ if (!existsSync(join(here, 'app', 'data', 'steps.json'))) {
 if (!existsSync(join(here, 'app', 'data', 'trophies.json'))) {
   throw new Error('app/data/trophies.json is missing: the trophy list is part of this entry');
 }
+
+// v3 guard: the hand-in must carry cited steps for every trophy, and every
+// step must name a source this entry actually lists. A step whose source is
+// a list instead of a string, or a source id the data never declares, fails
+// the guard — that was the defect that sank the first v3 draft, where 39
+// steps carried a list of sources and would have rendered as one chip.
+function validateData() {
+  const trophies = JSON.parse(readFileSync(join(here, 'app', 'data', 'trophies.json'), 'utf-8'));
+  const steps = JSON.parse(readFileSync(join(here, 'app', 'data', 'steps.json'), 'utf-8'));
+  const known = new Set((steps.sources || []).map((s) => s.id));
+  if (!Array.isArray(trophies.trophies) || trophies.trophies.length !== 55) {
+    throw new Error(`trophies.json must list 55 trophies, found ${trophies.trophies?.length}`);
+  }
+  let total = 0;
+  for (const t of trophies.trophies) {
+    if (!String(t.guide || '').trim()) throw new Error(`trophy ${t.id} has a blank guide`);
+    const entry = (steps.trophies || {})[String(t.id)];
+    const list = entry?.steps || [];
+    if (!list.length) throw new Error(`trophy ${t.id} (${t.name}) has no cited steps`);
+    for (const s of list) {
+      if (typeof s.s !== 'string' || !known.has(s.s)) {
+        throw new Error(`trophy ${t.id} has a step with an unknown source: ${JSON.stringify(s.s)}`);
+      }
+      total += 1;
+    }
+  }
+  console.log(`data: 55 trophies, ${total} cited steps, ${known.size} sources (checked ${steps.checked})`);
+}
+
+validateData();
 
 mkdirSync(out, { recursive: true });
 cpSync(join(here, 'app'), join(out, 'app'), { recursive: true });

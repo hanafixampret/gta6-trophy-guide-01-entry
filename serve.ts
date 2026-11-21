@@ -3,7 +3,7 @@
 // http://localhost:8080 (`--port <n>` for another port). It sends the MIME types
 // a browser needs, refuses any path outside app/, and otherwise does nothing
 // clever: this is a development convenience, not a web server for the internet.
-import { createReadStream, statSync } from 'node:fs';
+import { createReadStream, readFileSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { extname, join, normalize, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -29,6 +29,34 @@ const MIME: Record<string, string> = {
   '.woff2': 'font/woff2',
   '.webmanifest': 'application/manifest+json',
 };
+
+// v3: fail fast at startup if the guide data is broken — 55 trophies, every
+// trophy with at least one cited step, every step naming a listed source.
+{
+  const trophies = JSON.parse(readFileSync(join(root, 'data', 'trophies.json'), 'utf-8'));
+  const steps = JSON.parse(readFileSync(join(root, 'data', 'steps.json'), 'utf-8'));
+  const known = new Set((steps.sources || []).map((s) => s.id));
+  if (!Array.isArray(trophies.trophies) || trophies.trophies.length !== 55) {
+    console.error(`data error: trophies.json must list 55 trophies, found ${trophies.trophies?.length}`);
+    process.exit(1);
+  }
+  let total = 0;
+  for (const t of trophies.trophies) {
+    const list = (steps.trophies || {})[String(t.id)]?.steps || [];
+    if (!list.length) {
+      console.error(`data error: trophy ${t.id} (${t.name}) has no cited steps`);
+      process.exit(1);
+    }
+    for (const s of list) {
+      if (typeof s.s !== 'string' || !known.has(s.s)) {
+        console.error(`data error: trophy ${t.id} has a step with an unknown source: ${JSON.stringify(s.s)}`);
+        process.exit(1);
+      }
+      total += 1;
+    }
+  }
+  console.log(`data: 55 trophies, ${total} cited steps, ${known.size} sources (checked ${steps.checked})`);
+}
 
 createServer((request, response) => {
   const url = new URL(request.url ?? '/', 'http://localhost');

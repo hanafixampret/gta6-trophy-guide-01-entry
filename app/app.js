@@ -13,6 +13,8 @@ const SOURCE_LABELS = {
   powerpyx: 'PowerPyx',
   exophase: 'Exophase',
   psnprofiles: 'PSNProfiles',
+  keengamer: 'KeenGamer',
+  pushsquare: 'Push Square',
 };
 
 const KIND_LABELS = {
@@ -61,7 +63,7 @@ function renderAuditStrip() {
   if (!el) return;
   const n = totalCitedSteps();
   const srcs = stepsMeta?.sources?.length ?? 3;
-  const checked = stepsMeta?.checked ?? '2026-11-20';
+  const checked = stepsMeta?.checked ?? '2026-11-21';
   el.textContent = `55/55 guides cited · ${n} cited steps · ${srcs} sources, checked ${checked}`;
 }
 
@@ -299,7 +301,7 @@ const ROADMAP = [
   {
     title: 'Stage 2 — Finish every side strand',
     hours: 'As you go',
-    body: 'Each named character has a final mission, and each one is a trophy: Andy (Road to Rehabilitation), Kenton (This Was No Boat Accident), Billy (The Lone Rider), Randy (Supply & Demand) and Tyrone (Spin On This!). Alongside them, complete 8 mission strands for strangers across Leonida for Strangers & Freaks, and hunt a unique animal for Bret (Fair Game) — a unique animal only exists once, so take the shot when you find it.',
+    body: 'Each named character has a final mission, and each one is a trophy: Andy (Road to Rehabilitation), Kenton (This Was No Boat Accident), Billy (The Lone Rider), Randy (Supply & Demand) and Tyrone (Spin On This!). Alongside them, complete 8 mission strands for strangers across Leonida for Strangers & Freaks, and hunt for Bret (Fair Game): after Coffee Break, as Jason, answer the text from Bret to start Veteran Hunted in Lummox County — he gives you the Killtelligence SM-69 rifle and marks 15 Target Decks, so hunt every animal he asks for.',
     items: [22, 23, 24, 25, 26, 27, 29],
   },
   {
@@ -329,7 +331,7 @@ function renderRoadmap() {
   const h = document.createElement('h2');
   h.textContent = 'Roadmap to the platinum';
   const p = document.createElement('p');
-  p.textContent = 'PowerPyx rates the set 4/10 and about 200 hours, one playthrough, no online trophies. Built from the official descriptions plus the PowerPyx roadmap.';
+  p.textContent = 'PowerPyx rates the set 4/10 and about 200 hours, one playthrough, no online trophies. Push Square estimates up to 300 hours — see Sources & audit. Built from the official descriptions plus the PowerPyx roadmap.';
   head.append(h, p);
   viewEl.append(head);
   for (const stage of ROADMAP) {
@@ -387,13 +389,55 @@ function renderMissables() {
   ul.className = 'cards';
   for (const t of missable) ul.append(cardElement(t));
   viewEl.append(ul);
+  const gridHead = document.createElement('h2');
+  gridHead.textContent = 'Missables by chapter — when each window opens';
+  gridHead.style.marginTop = '26px';
+  viewEl.append(gridHead);
+  const gridIntro = document.createElement('p');
+  gridIntro.className = 'prose';
+  gridIntro.textContent = 'Only one trophy can be missed outright (Chapter 1, below). The one-off moments are grouped by the chapter their window first opens in — do them when you reach that chapter rather than assuming a replay.';
+  viewEl.append(gridIntro);
+  const grid = document.createElement('div');
+  grid.className = 'chapter-grid';
+  const MISSABLE_WINDOWS = [
+    ['Chapter 1', [28]],
+    ['Chapter 2', [29, 46]],
+    ['Chapter 3', [45, 49]],
+    ['Chapter 4', []],
+    ['Chapter 5', []],
+    ['Any time', [37, 44, 50]],
+  ];
+  for (const [label, ids] of MISSABLE_WINDOWS) {
+    const cell = document.createElement('div');
+    cell.className = 'chapter-cell';
+    const ch = document.createElement('h3');
+    ch.textContent = label;
+    cell.append(ch);
+    if (!ids.length) {
+      const none = document.createElement('p');
+      none.textContent = 'No one-off moment — the chapter trophies here are automatic.';
+      cell.append(none);
+    }
+    for (const id of ids) {
+      const t = trophyById(id);
+      if (!t) continue;
+      const item = document.createElement('button');
+      item.type = 'button';
+      item.className = 'chapter-trophy';
+      item.textContent = `${t.name} — ${t.grade}`;
+      item.addEventListener('click', () => openDetail(id));
+      cell.append(item);
+    }
+    grid.append(cell);
+  }
+  viewEl.append(grid);
   const sub = document.createElement('h2');
   sub.textContent = 'One-off moments — do them when they appear';
   sub.style.marginTop = '26px';
   viewEl.append(sub);
   const explain = document.createElement('p');
   explain.className = 'prose';
-  explain.textContent = 'These nine hidden trophies read like single scenes — a cocktail on Ocean Beach, a bowling alley, a showroom smash — and PowerPyx lists them as not yet pinned down, so nobody can promise they come back. They are not confirmed missable, but the safe play is to do each one the first time the moment shows up, rather than assuming a replay.';
+  explain.textContent = 'These seven hidden trophies read like single scenes — a cocktail on Ocean Beach, a bowling alley, a showroom smash — and each one is a single attempt or a specific setup, so the safe play is to do each one the first time the moment shows up, rather than assuming a replay. Their methods are now verified and cited in each guide — including Bad Luck, I Guess, whose method was unknown in v2 and is now given in full from PowerPyx.';
   viewEl.append(explain);
   const oneOff = trophies.filter((t) => t.oneOff);
   const ul2 = document.createElement('ul');
@@ -421,6 +465,8 @@ function renderAudit() {
     ['Exophase — Grand Theft Auto VI trophies (PS5): the full official list, names, descriptions and grades.', 'https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/'],
     ['PSNProfiles — Grand Theft Auto VI trophies: the same list, plus PSN\u2019s progress counts (for example 42 Shooting Range challenges).', 'https://psnprofiles.com/trophies/43531-grand-theft-auto-vi'],
     ['PowerPyx — GTA 6 Trophy Guide & Roadmap: difficulty 4/10, about 200 hours, one playthrough, no mission replay, the one potentially missable trophy, cheats disabling trophies, and the 100% checklist details.', 'https://www.powerpyx.com/gta-6-grand-theft-auto-vi-trophy-guide-roadmap/'],
+    ['KeenGamer — GTA 6 Trophy Guide & Platinum Roadmap: a second full check on the 55 trophies — difficulty, hours, chapter structure and the 100% numbers, agreeing with PowerPyx on nearly every count.', 'https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/'],
+    ['Push Square — GTA 6 Trophy Guide and Roadmap: a third check, including the 300-hour estimate, the Parrotfish challenge, and the two named shooting-range venues.', 'https://www.pushsquare.com/guides/gta-6-trophy-guide-and-roadmap'],
   ];
   for (const [text, url] of sources) {
     const li = document.createElement('li');
@@ -433,7 +479,8 @@ function renderAudit() {
   }
   // Audit summary, computed from the data the app actually loaded: every
   // trophy has cited steps, and the counts below are the real ones.
-  const stepCounts = { powerpyx: 0, exophase: 0, psnprofiles: 0 };
+  const stepCounts = {};
+  for (const s of (stepsMeta?.sources || [{ id: 'powerpyx' }, { id: 'exophase' }, { id: 'psnprofiles' }])) stepCounts[s.id] = 0;
   let withChapter = 0;
   let withMission = 0;
   for (const t of trophies) {
@@ -445,7 +492,8 @@ function renderAudit() {
   }
   const auditLine = document.createElement('p');
   auditLine.className = 'audit-line';
-  auditLine.textContent = `Audit, checked 20 November 2026: 55/55 trophies have a cited guide — ${totalCitedSteps()} cited steps in total (PowerPyx ${stepCounts.powerpyx}, Exophase ${stepCounts.exophase}, PSNProfiles ${stepCounts.psnprofiles}). ${withChapter} trophies name their chapter, ${withMission} name their mission. Every step carries its source beside it; a step with no source earns no credit in this guide.`;
+  const countsText = Object.entries(stepCounts).map(([id, n]) => `${SOURCE_LABELS[id] || id} ${n}`).join(', ');
+  auditLine.textContent = `Audit, checked 21 November 2026: 55/55 trophies have a cited guide — ${totalCitedSteps()} cited steps in total (${countsText}). ${withChapter} trophies name their chapter, ${withMission} name their mission. Every step carries its source beside it; a step with no source earns no credit in this guide.`;
   const matrixHead = document.createElement('h3');
   matrixHead.textContent = 'Source matrix — what each source covers';
   const matrix = document.createElement('table');
@@ -455,6 +503,8 @@ function renderAudit() {
     ['Exophase', 'All 55 names, descriptions and grades, plus the earned rate of every trophy (0.00–100.00% on 20 Nov 2026).', String(stepCounts.exophase)],
     ['PSNProfiles', 'The same 55-name list (the two lists agree on every name, description and grade), plus PSN progress counts — for example 42 Shooting Range challenges.', String(stepCounts.psnprofiles)],
     ['PowerPyx', 'The roadmap (4/10, about 200 hours, one playthrough, no mission replay, the one potentially missable trophy, cheats disabling trophies) and the 100% checklist details, plus the method behind nearly every step.', String(stepCounts.powerpyx)],
+    ['KeenGamer', 'A second full check on the 55 trophies — difficulty, hours, chapter structure and the 100% numbers; agrees with PowerPyx on nearly every count.', String(stepCounts.keengamer)],
+    ['Push Square', 'A third check: up to 300 hours to platinum, the Parrotfish fishing challenge, and the two named shooting-range venues.', String(stepCounts.pushsquare)],
   ];
   for (let r = 0; r < matrixRows.length; r += 1) {
     const tr = document.createElement('tr');
@@ -468,17 +518,25 @@ function renderAudit() {
   const disagreeHead = document.createElement('h3');
   disagreeHead.textContent = 'Where the sources disagree — both sides';
   const disagreements = [
-    ['The final mission is in Chapter 4 — or Chapter 5?', 'PowerPyx says You Gotta Know When to Get Off unlocks after the final mission in Chapter 4, “Starting From Zero”.', 'PowerPyx also lists Snow Storm (Operation Savage Glory) as a Chapter 5 main mission — and a story with five chapters cannot end in Chapter 4.', 'Our call: the story runs to five chapters and Snow Storm is Chapter 5; the finale’s exact chapter is flagged, not asserted. The roadmap covers Chapters 1–5.'],
+    ['The final mission is in Chapter 4 — or Chapter 5?', 'PowerPyx says You Gotta Know When to Get Off unlocks after the final mission in Chapter 4, “Starting From Zero”.', 'PowerPyx also lists Snow Storm (Operation Savage Glory) as a Chapter 5 main mission — and a story with five chapters cannot end in Chapter 4.', 'Our call: resolved in v3 — the finale is the last mission of Chapter 4, Starting From Zero, and Chapter 5 (Operation Savage Glory, Snow Storm) plays after it. The roadmap covers Chapters 1–5.', true],
     ['Is the Chapter 1 meditation required for Positive Mental Attitude?', 'PowerPyx: “currently unclear if it’s required for the trophy or not.” The meditation adds +1 to the counter in the Progress menu.', 'The same meditation is not marked as a “Meditation Spot” like the other 18, so it may not count toward the trophy at all.', 'Our call: do it in Chapter 1 anyway. It costs nothing, and it removes the only potentially missable trophy in the game.'],
     ['How many WAiNK locations are itemized?', 'PowerPyx lists 31 landmarks, 35 curiosities and 23 sculptures — 89 locations by type.', 'The trophy needs 100 WAiNK locations, so 11 or more are not itemized by any source we checked.', 'Our call: we state the 89 itemized and the gap, rather than inventing a category.'],
-    ['How do you earn “Bad Luck, I Guess”?', 'PowerPyx: “currently unknown (believed to be related to the Payday Loans store from Prologue, possibly robbing it later again in a specific manner, it’s located in Vice City – Little Cuba).”', 'Exophase gives no method at all — only the description, “Second time’s the charm.”', 'Our call: the guide presents the Payday Loans guess as a guess, not a fact.'],
+    ['How do you earn “Bad Luck, I Guess”?', 'PowerPyx now gives the method: rob the Payday Loans in Vice City, Little Cuba, alone as Lucia, after the Chapter 3 mission Credit Check — take the 3 cash drawers and escape on foot.', 'KeenGamer still lists this trophy as unconfirmed.', 'Our call: resolved in v3 — the guide now gives the full method from PowerPyx; KeenGamer’s “unconfirmed” is noted, not followed.', true],
+    ['How many shooting-range locations are there?', 'PowerPyx: 12 range locations, 42 gold medals in total.', 'Push Square names only 2 venues — Rodgers Ranch & Shooting Range Port Gellhorn and Griffin Shooting Range Balsero.', 'Our call: 42 gold medals is agreed by all three sources; the venue count is disputed, so the guide gives the 42 and names both counts.', false],
+    ['How long to the platinum — 200 hours or 300?', 'PowerPyx and KeenGamer: about 200 hours.', 'Push Square: up to 300 hours.', 'Our call: we quote both — plan for 200, budget up to 300 if you take everything slowly.', false],
   ];
   const disagreeBox = document.createElement('div');
-  for (const [title, sideA, sideB, call] of disagreements) {
+  for (const [title, sideA, sideB, call, resolved] of disagreements) {
     const item = document.createElement('div');
-    item.className = 'disagree';
+    item.className = 'disagree' + (resolved ? ' resolved' : '');
     const t = document.createElement('h4');
     t.textContent = title;
+    if (resolved) {
+      const badge = document.createElement('span');
+      badge.className = 'resolved-tag';
+      badge.textContent = 'Resolved in v3';
+      t.append(' ', badge);
+    }
     const a = document.createElement('p');
     a.innerHTML = `<strong>One side:</strong> `;
     a.append(document.createTextNode(sideA));
@@ -492,9 +550,9 @@ function renderAudit() {
     disagreeBox.append(item);
   }
   const honest = document.createElement('h3');
-  honest.textContent = 'What is not yet checked';
+  honest.textContent = 'What is still open';
   const honestP = document.createElement('p');
-  honestP.textContent = 'GTA VI released on 19 November 2026, the day this guide was built. Where a guide gives a specific place or step that has not yet been checked in the game, it says so in its own text and cites the official description it was built from. Locations and steps will firm up as players finish the game; the list itself — names, descriptions, grades — is already official.';
+  honestP.textContent = 'GTA VI released on 19 November 2026, and this guide was checked on 21 November 2026 against PowerPyx, KeenGamer and Push Square. Where a guide gives a specific place or step, it names the source beside it; where the sources still disagree, the panels above show both sides and the call this guide makes. The list itself — names, descriptions, grades — is official.';
   const how = document.createElement('h3');
   how.textContent = 'How the tracker works';
   const howP = document.createElement('p');

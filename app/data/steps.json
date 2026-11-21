@@ -1,9 +1,11 @@
 {
-  "checked": "2026-11-20",
+  "checked": "2026-11-21",
   "sources": [
     {"id": "powerpyx", "label": "PowerPyx — GTA 6 Trophy Guide & Roadmap", "url": "https://www.powerpyx.com/gta-6-grand-theft-auto-vi-trophy-guide-roadmap/"},
     {"id": "exophase", "label": "Exophase — Grand Theft Auto VI trophies (PS5)", "url": "https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/"},
-    {"id": "psnprofiles", "label": "PSNProfiles — Grand Theft Auto VI trophies", "url": "https://psnprofiles.com/trophies/43531-grand-theft-auto-vi"}
+    {"id": "psnprofiles", "label": "PSNProfiles — Grand Theft Auto VI trophies", "url": "https://psnprofiles.com/trophies/43531-grand-theft-auto-vi"},
+    {"id": "keengamer", "label": "KeenGamer — GTA 6 Trophy Guide & Platinum Roadmap", "url": "https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/"},
+    {"id": "pushsquare", "label": "Push Square — GTA 6 Trophy Guide and Roadmap", "url": "https://www.pushsquare.com/guides/gta-6-trophy-guide-and-roadmap"}
   ],
   "trophies": {
     "1": {
@@ -14,7 +16,10 @@
       "rarity": 0,
       "steps": [
         {"t": "Earn the other 54 trophies. The platinum unlocks on its own when the last one lands — there is no separate task.", "s": "powerpyx"},
-        {"t": "No multiplayer or DLC is needed: all 55 trophies are single-player and offline.", "s": "powerpyx"}
+        {"t": "No multiplayer or DLC is needed: all 55 trophies are single-player and offline.", "s": "powerpyx"},
+        {"t": "KeenGamer agrees with PowerPyx on the 4/10 difficulty and the roughly 200 hours to platinum.", "s": "keengamer"},
+        {"t": "Push Square estimates up to 300 hours to platinum — the longest of the three sources; see the disagreement panel in Sources & audit.", "s": "pushsquare"},
+        {"t": "KeenGamer also lists all 55 trophies as single-player with no online trophies, agreeing with PowerPyx.", "s": "keengamer"}
       ]
     },
     "2": {
@@ -25,7 +30,8 @@
       "rarity": 100,
       "steps": [
         {"t": "Play the first main mission, Gone Fishing, in Chapter 1. The trophy is automatic on completion and cannot be missed.", "s": "powerpyx"},
-        {"t": "The official description is simply 'Complete Gone Fishing.'", "s": "exophase"}
+        {"t": "The official description is simply 'Complete Gone Fishing.'", "s": "exophase"},
+        {"t": "KeenGamer lists Gone Fishing as the first story mission in Chapter 1, agreeing with PowerPyx.", "s": "keengamer"}
       ]
     },
     "3": {
@@ -36,6 +42,7 @@
       "rarity": 7.99,
       "steps": [
         {"t": "Finish Chapter 1. The trophy pops when the first main mission of Chapter 2, What's in the Bag?, is completed.", "s": "powerpyx"},
+        {"t": "KeenGamer confirms Chapter 1 ends here and Chapter 2 opens with What's in the Bag?, agreeing with PowerPyx.", "s": "keengamer"},
         {"t": "Automatic story trophy — it cannot be missed.", "s": "powerpyx"}
       ]
     },
@@ -47,6 +54,7 @@
       "rarity": 0.9,
       "steps": [
         {"t": "Finish Chapter 2. The trophy pops when the first main mission of Chapter 3, Welcome to Vice City, is completed.", "s": "powerpyx"},
+        {"t": "KeenGamer confirms Chapter 2 ends here and Chapter 3 opens with Welcome to Vice City, agreeing with PowerPyx.", "s": "keengamer"},
         {"t": "Automatic story trophy — it cannot be missed.", "s": "powerpyx"}
       ]
     },
@@ -58,6 +66,7 @@
       "rarity": 0.02,
       "steps": [
         {"t": "Finish Chapter 3. The trophy pops after the first two main missions of Chapter 4, Ocean Beach and Another Life.", "s": "powerpyx"},
+        {"t": "KeenGamer confirms Chapter 3 ends here and Chapter 4 opens with Ocean Beach and Another Life, agreeing with PowerPyx.", "s": "keengamer"},
         {"t": "Automatic story trophy — it cannot be missed.", "s": "powerpyx"}
       ]
     },
@@ -69,6 +78,7 @@
       "rarity": 0.02,
       "steps": [
         {"t": "Finish Chapter 4. The trophy pops after its final main mission, Starting From Zero.", "s": "powerpyx"},
+        {"t": "KeenGamer confirms Starting From Zero is the final mission of Chapter 4, agreeing with PowerPyx.", "s": "keengamer"},
         {"t": "Automatic story trophy — it cannot be missed.", "s": "powerpyx"}
       ]
     },
@@ -81,7 +91,8 @@
       "steps": [
         {"t": "Complete the final mission. PowerPyx places it after Starting From Zero, the last mission of Chapter 4 — but it also lists a Chapter 5 mission (Snow Storm), so the finale's exact chapter is flagged in Sources & audit rather than asserted.", "s": "powerpyx"},
         {"t": "There is no mission replay, so there is no second attempt at the finale in the same playthrough — but the trophy is automatic on completion, so it cannot be missed by failing.", "s": "powerpyx"},
-        {"t": "The official description is 'Complete the final mission.'", "s": "exophase"}
+        {"t": "The official description is 'Complete the final mission.'", "s": "exophase"},
+        {"t": "KeenGamer confirms the finale comes after Starting From Zero in Chapter 4, agreeing with PowerPyx.", "s": "keengamer"}
       ]
     }
 ,
@@ -93,6 +104,7 @@
       "rarity": 2.52,
       "steps": [
         {"t": "Play the Chapter 2 main mission Breakfast Run. The trophy pops during it.", "s": "powerpyx"},
+        {"t": "KeenGamer lists Breakfast Run as a Chapter 2 main mission, agreeing with PowerPyx.", "s": "keengamer"},
         {"t": "Automatic story trophy — it cannot be missed.", "s": "powerpyx"}
       ]
     },
@@ -104,6 +116,7 @@
       "rarity": 0.02,
       "steps": [
         {"t": "Play the Chapter 3 main mission The Cartel Heist. The trophy pops during it.", "s": "powerpyx"},
+        {"t": "KeenGamer lists The Cartel Heist as a Chapter 3 main mission, agreeing with PowerPyx.", "s": "keengamer"},
         {"t": "Automatic story trophy — it cannot be missed.", "s": "powerpyx"}
       ]
     },
@@ -115,6 +128,7 @@
       "rarity": 0.02,
       "steps": [
         {"t": "Play the Chapter 4 main mission Child's Play. The trophy pops during it.", "s": "powerpyx"},
+        {"t": "KeenGamer lists Child's Play as a Chapter 4 main mission, agreeing with PowerPyx.", "s": "keengamer"},
         {"t": "Automatic story trophy — it cannot be missed.", "s": "powerpyx"}
       ]
     },
@@ -126,6 +140,7 @@
       "rarity": 0.02,
       "steps": [
         {"t": "Play the Chapter 4 main mission Headliners. The trophy pops during it.", "s": "powerpyx"},
+        {"t": "KeenGamer lists Headliners as a Chapter 4 main mission, agreeing with PowerPyx.", "s": "keengamer"},
         {"t": "Automatic story trophy — it cannot be missed.", "s": "powerpyx"}
       ]
     },
@@ -137,6 +152,7 @@
       "rarity": 0.02,
       "steps": [
         {"t": "Play the Chapter 4 main mission VCIA Takedown. The trophy pops during it.", "s": "powerpyx"},
+        {"t": "KeenGamer lists VCIA Takedown as a Chapter 4 main mission, agreeing with PowerPyx.", "s": "keengamer"},
         {"t": "Automatic story trophy — it cannot be missed.", "s": "powerpyx"}
       ]
     },
@@ -148,7 +164,8 @@
       "rarity": 0.02,
       "steps": [
         {"t": "Play the Chapter 5 main mission Operation Savage Glory. The trophy pops during it.", "s": "powerpyx"},
-        {"t": "This is the mission that proves the story runs to five chapters — the roadmap's Stage 1 covers Chapters 1–5, not 1–4.", "s": "powerpyx"}
+        {"t": "This is the mission that proves the story runs to five chapters — the roadmap's Stage 1 covers Chapters 1–5, not 1–4.", "s": "powerpyx"},
+        {"t": "KeenGamer confirms Operation Savage Glory is a Chapter 5 main mission, agreeing with PowerPyx.", "s": "keengamer"}
       ]
     },
     "14": {
@@ -164,7 +181,11 @@
         {"t": "Study any 100 of the 255 animals through the binoculars. Every dog and cat breed counts separately; unlike Red Dead Redemption 2, no hunting or skinning is needed.", "s": "powerpyx"},
         {"t": "Complete any 70 of the 80 challenges — ten more than needed, so skip the hardest ones.", "s": "powerpyx"},
         {"t": "Only a few categories demand everything: all robberies, all underwater discoveries, all shooting ranges, all drone races, and all of Bret's quests. Most collectibles and side quests are only partly required — the checklist is closer to 60% true completion.", "s": "powerpyx"},
-        {"t": "Nothing toward 100% is missable; everything is doable after the story in free-roam. PowerPyx calls this the hardest trophy.", "s": "powerpyx"}
+        {"t": "Nothing toward 100% is missable; everything is doable after the story in free-roam. PowerPyx calls this the hardest trophy.", "s": "powerpyx"},
+        {"t": "KeenGamer confirms any 100 optional missions count toward 100%, agreeing with PowerPyx.", "s": "keengamer"},
+        {"t": "KeenGamer confirms any 200 of the 277 base-model vehicles scanned count toward 100%, agreeing with PowerPyx.", "s": "keengamer"},
+        {"t": "KeenGamer confirms any 100 of the 255 animals studied count toward 100%, agreeing with PowerPyx.", "s": "keengamer"},
+        {"t": "KeenGamer confirms any 70 of the 80 challenges count toward 100%, agreeing with PowerPyx.", "s": "keengamer"}
       ]
     }
 ,
@@ -180,7 +201,9 @@
         {"t": "Track progress by region under Progress, then Activities, then Stunts, or on the map under Exploration, then Stunt Spots, where every stunt keeps its unique name and stays marked once done.", "s": "powerpyx"},
         {"t": "Performing a stunt once counts as completed — the extra challenges shown on map icons are not required.", "s": "powerpyx"},
         {"t": "For the 100% checklist you need 300 stunts, so keep going past 250 if you want A Long Road too.", "s": "powerpyx"},
-        {"t": "The official description is 'Complete 250 Stunts.'", "s": "exophase"}
+        {"t": "The official description is 'Complete 250 Stunts.'", "s": "exophase"},
+        {"t": "KeenGamer confirms the 397-stunt breakdown — 130 stunt jumps, 202 under-the-bridge flights, 40 knife flights and 25 base jumps — agreeing with PowerPyx.", "s": "keengamer"},
+        {"t": "Push Square agrees 250 stunts earn the trophy and 300 are needed for 100%.", "s": "pushsquare"}
       ]
     },
     "16": {
@@ -193,7 +216,9 @@
         {"t": "Do each of the 9 activity types at least once: fishing, hunting, golf, shooting ranges, pool, basketball (scoring hoops), playing a video game, winning a car race / race challenge / Top Fun drone race, and performing a stunt.", "s": "powerpyx"},
         {"t": "Check what you have done under Touchpad, then Progress, then Activities — scrolling over a type shows how many you have done.", "s": "powerpyx"},
         {"t": "Most types come up on their own from the story and from unfogging the map (blue dumbbell icons). While working on the other trophies and the 100% checklist you will do one of each automatically.", "s": "powerpyx"},
-        {"t": "The official description is 'Try each type of activity once.'", "s": "exophase"}
+        {"t": "The official description is 'Try each type of activity once.'", "s": "exophase"},
+        {"t": "KeenGamer lists the same 9 activity types — fishing, hunting, golf, shooting ranges, pool, basketball, playing a video game, winning a race, and performing a stunt — agreeing with PowerPyx.", "s": "keengamer"},
+        {"t": "Push Square agrees all 9 activity types are needed, with no online activity among them.", "s": "pushsquare"}
       ]
     },
     "17": {
@@ -205,7 +230,9 @@
       "steps": [
         {"t": "Earn a gold medal in every Shooting Range challenge. There are 12 range locations and 42 gold medals in total.", "s": "powerpyx"},
         {"t": "PSNProfiles counts the same 42 Shooting Range challenges — the two lists agree.", "s": "psnprofiles"},
-        {"t": "Shooting Range challenges also raise your Focus level, which helps Gunslinger later.", "s": "powerpyx"}
+        {"t": "Shooting Range challenges also raise your Focus level, which helps Gunslinger later.", "s": "powerpyx"},
+        {"t": "KeenGamer confirms 42 gold medals across the shooting ranges, agreeing with PowerPyx.", "s": "keengamer"},
+        {"t": "Push Square names only 2 shooting-range venues — Rodgers Ranch & Shooting Range Port Gellhorn and Griffin Shooting Range Balsero — against PowerPyx's 12 locations; see the disagreement panel in Sources & audit.", "s": "pushsquare"}
       ]
     },
     "18": {
@@ -216,7 +243,9 @@
       "rarity": 0,
       "steps": [
         {"t": "Win a Top Fun Drone Race at every location. There are 14 locations and 42 drone races in total.", "s": "powerpyx"},
-        {"t": "A drone-race win also counts as one of the 9 activity types for Master of None.", "s": "powerpyx"}
+        {"t": "A drone-race win also counts as one of the 9 activity types for Master of None.", "s": "powerpyx"},
+        {"t": "KeenGamer confirms 14 Top Fun locations with 42 drone races, agreeing with PowerPyx.", "s": "keengamer"},
+        {"t": "Push Square agrees all 42 drone races are needed for 100%.", "s": "pushsquare"}
       ]
     },
     "19": {
@@ -227,7 +256,9 @@
       "rarity": 0.01,
       "steps": [
         {"t": "Win 20 different races. There are 40 unique race locations in total.", "s": "powerpyx"},
-        {"t": "A race win also counts as one of the 9 activity types for Master of None.", "s": "powerpyx"}
+        {"t": "A race win also counts as one of the 9 activity types for Master of None.", "s": "powerpyx"},
+        {"t": "KeenGamer confirms 40 unique race locations, agreeing with PowerPyx.", "s": "keengamer"},
+        {"t": "Push Square agrees only 30 of the 40 race locations are needed for 100%.", "s": "pushsquare"}
       ]
     },
     "20": {
@@ -239,7 +270,8 @@
       "steps": [
         {"t": "After the Chapter 1 main mission Feng Shui (Meet Cal), Cal sends a text that marks a fishing location with a purple icon on the map, west of Key Lento.", "s": "powerpyx"},
         {"t": "Go to the marked spot and take on the fishing challenge.", "s": "powerpyx"},
-        {"t": "Beat Cal in the challenge. Exophase shows this as one of the most-earned trophies (10.57%) — it is available early and straightforward.", "s": "powerpyx"}
+        {"t": "Beat Cal in the challenge. Exophase shows this as one of the most-earned trophies (10.57%) — it is available early and straightforward.", "s": "powerpyx"},
+        {"t": "Push Square notes the fishing challenge against Cal involves catching a Parrotfish over 2kg.", "s": "pushsquare"}
       ]
     },
     "21": {
@@ -266,7 +298,8 @@
         {"t": "Andy's questline is Lucia-only. During Chapter 3, while playing as Lucia, you get a call from Andy, then a text with her home address that marks the questline in Belville.", "s": "powerpyx"},
         {"t": "Complete the 5 Andy quests: Climbing the Cellerichain (Parts 1–3), Pay the Cellerica Fee, Peach! (Join the Cellerica Initiation), Read the Label (Retrieve the Cellerica Van), and Puff Puff Pass (Meet at the Warehouse).", "s": "powerpyx"},
         {"t": "The last one, Puff Puff Pass, is the final mission for Andy — finishing it unlocks the trophy.", "s": "powerpyx"},
-        {"t": "All of Andy's quests are still available after the story.", "s": "powerpyx"}
+        {"t": "All of Andy's quests are still available after the story.", "s": "powerpyx"},
+        {"t": "KeenGamer confirms Andy's 5 quests are Lucia-only and still available after the story, agreeing with PowerPyx.", "s": "keengamer"}
       ]
     },
     "23": {
@@ -280,7 +313,9 @@
         {"t": "He marks purple treasure-chest icons on the map. Find the underwater treasures and bring them back to Kenton — use the metal detector while diving to dig treasure from the ocean floor.", "s": "powerpyx"},
         {"t": "After the first set of treasures he calls you back to his shop, then marks more locations. In total, clear 7 shipwrecks for his questline.", "s": "powerpyx"},
         {"t": "Track it under Progress, then Characters, then Kenton Rees, and under Progress, then Collections, then Kenton's Treasures.", "s": "powerpyx"},
-        {"t": "Kenton becomes temporarily unavailable after Chapter 1, but returns in Chapter 2–3 (as Jason he texts you). Calling Brian as Jason in Chapter 2 speeds it up. He is not missable.", "s": "powerpyx"}
+        {"t": "Kenton becomes temporarily unavailable after Chapter 1, but returns in Chapter 2–3 (as Jason he texts you). Calling Brian as Jason in Chapter 2 speeds it up. He is not missable.", "s": "powerpyx"},
+        {"t": "KeenGamer confirms Kenton's 7 shipwrecks, agreeing with PowerPyx.", "s": "keengamer"},
+        {"t": "Push Square agrees Kenton returns in Chapters 2–3 after going quiet in Chapter 1.", "s": "pushsquare"}
       ]
     },
     "24": {
@@ -293,7 +328,9 @@
         {"t": "Billy's questline is marked automatically after the Chapter 2 main mission Coffee Break, at Thrillbilly Mudclub in Kelly County.", "s": "powerpyx"},
         {"t": "Complete the 5 Billy quests: Thrillbillies (Check Out the Mud Club), Twist Wrist, Smash, Grab (Join Billy on a Job), Mall Rats (Join Billy on a Job), The Impaler (Steal the Impaler), and Hometown Heroes (Join Billy on a Job).", "s": "powerpyx"},
         {"t": "The last one, Hometown Heroes, is the final mission for Billy — finishing it unlocks the trophy.", "s": "powerpyx"},
-        {"t": "All of Billy's quests are still available after the story.", "s": "powerpyx"}
+        {"t": "All of Billy's quests are still available after the story.", "s": "powerpyx"},
+        {"t": "KeenGamer confirms Billy's 5 quests after Coffee Break, agreeing with PowerPyx.", "s": "keengamer"},
+        {"t": "Push Square agrees the final Billy quest is Hometown Heroes.", "s": "pushsquare"}
       ]
     },
     "25": {
@@ -306,7 +343,8 @@
         {"t": "Complete 8 mission strands for strangers across Leonida. Only certain questlines count — Moses, Tyrone, Yasmani, Andy, Billy and Eddie do NOT count as 'strangers' for this trophy.", "s": "powerpyx"},
         {"t": "Confirmed to count: Kirk (Skunk Ape / Mr. Mangrove — Skunk Apeology 101, tree effigies, Advanced Skunk Apeonomics), Kyle (McKittrick Farm, chemicals, Buddy?), Yago (street race, Bumper to Bumper, race against Yago, Brother to Brother), and Pilot Pete (The Last Mile: Passing the Torch and Backseat Pilot, Pete's Deliveries). PowerPyx notes there are more strangers yet to be discovered.", "s": "powerpyx"},
         {"t": "Track how many you have done via the trophy tracker in the trophy list.", "s": "powerpyx"},
-        {"t": "All of them are still findable after the story in free-roam.", "s": "powerpyx"}
+        {"t": "All of them are still findable after the story in free-roam.", "s": "powerpyx"},
+        {"t": "KeenGamer agrees the named side characters — Moses, Tyrone, Yasmani, Andy, Billy and Eddie — do not count toward this trophy.", "s": "keengamer"}
       ]
     },
     "26": {
@@ -321,7 +359,8 @@
         {"t": "Track the cars he wants under Map, then Robberies (money-bag icon), then Randy's Wish List. He marks some cars in fixed locations, but you can also steal them off the street — scanning a car with the WAiNK app shows whether it is on the list.", "s": "powerpyx"},
         {"t": "Drive each car back to his garage (green 'RK' icon in the west of Vice City). Delivering in good condition pays more.", "s": "powerpyx"},
         {"t": "Good hunting grounds are the east of Vice City, at Vice Beach and Ocean Beach, where the cars are often parked outside hotels or driving around. New locations are marked as you complete the ones he gave you.", "s": "powerpyx"},
-        {"t": "This can still be done after the story.", "s": "powerpyx"}
+        {"t": "This can still be done after the story.", "s": "powerpyx"},
+        {"t": "KeenGamer confirms Randy wants 16 more sports cars after the Zorrusso, agreeing with PowerPyx.", "s": "keengamer"}
       ]
     },
     "27": {
@@ -334,7 +373,8 @@
         {"t": "Tyrone's questline is Jason-only. It is marked automatically after the Chapter 3 main mission Here, Kitty Kitty — purple markers for Synthetic Labs appear in Vice City.", "s": "powerpyx"},
         {"t": "Go to the labs and destroy them (the quest 'Take Out Kitty Litter').", "s": "powerpyx"},
         {"t": "After destroying enough labs, Tyrone gives the second quest, 'Spin On This' (Shut Down the Labs) — finishing it unlocks the trophy.", "s": "powerpyx"},
-        {"t": "All of this is still available after the story.", "s": "powerpyx"}
+        {"t": "All of this is still available after the story.", "s": "powerpyx"},
+        {"t": "KeenGamer confirms Tyrone's two quests — Take Out Kitty Litter, then Spin On This — agreeing with PowerPyx.", "s": "keengamer"}
       ]
     },
     "28": {
@@ -349,7 +389,8 @@
         {"t": "There are 18 meditation spots across 10 locations. Meditate with both Lucia and Jason at each spot and it counts as +2 at the same location.", "s": "powerpyx"},
         {"t": "You cannot do the final meditation until you can play both characters together, which unlocks after Chapter 2: Coffee Break.", "s": "powerpyx"},
         {"t": "Track progress under Progress, then Collections, then Exploration, then Meditations. For the 100% checklist only 15 of 18 are needed — but the trophy needs every spot.", "s": "powerpyx"},
-        {"t": "The official description is 'Meditate at every spot across Leonida.'", "s": "exophase"}
+        {"t": "The official description is 'Meditate at every spot across Leonida.'", "s": "exophase"},
+        {"t": "Push Square agrees there are 18 meditation spots and the first one at Jason's house in Chapter 1 is the one to do first.", "s": "pushsquare"}
       ]
     }
 ,
@@ -375,7 +416,9 @@
       "rarity": 0,
       "steps": [
         {"t": "Complete 3 Collectible Card sets. There are 18 card-set locations in total.", "s": "powerpyx"},
-        {"t": "Card sets are one of the collectible types that the 100% checklist only partly requires — you do not need all of them.", "s": "powerpyx"}
+        {"t": "Card sets are one of the collectible types that the 100% checklist only partly requires — you do not need all of them.", "s": "powerpyx"},
+        {"t": "KeenGamer confirms 18 card-set locations, agreeing with PowerPyx.", "s": "keengamer"},
+        {"t": "Push Square agrees only 15 of the 18 card sets are needed for 100%.", "s": "pushsquare"}
       ]
     },
     "31": {
@@ -388,7 +431,8 @@
         {"t": "WAiNK-scan 100 locations in the world by holding to scan (the same app you use for vehicles). There are more than 100, so it does not matter which ones.", "s": "powerpyx"},
         {"t": "PowerPyx itemizes 31 landmarks, 35 curiosities and 23 sculptures — 89 in total — but the trophy needs 100, so 11 or more are not itemized by any source we checked. The audit tab shows this gap rather than inventing a category.", "s": "powerpyx"},
         {"t": "No 'Flusher Tags' are listed among the WAiNK types.", "s": "powerpyx"},
-        {"t": "The official description is 'WAiNK It at 100 locations.'", "s": "exophase"}
+        {"t": "The official description is 'WAiNK It at 100 locations.'", "s": "exophase"},
+        {"t": "Push Square agrees more than 100 WAiNK locations exist, so any 100 count.", "s": "pushsquare"}
       ]
     },
     "32": {
@@ -400,7 +444,9 @@
       "steps": [
         {"t": "Complete any 50 of the 80 challenges. For the 100% checklist you need any 70 of 80, so this trophy unlocks automatically on the way there.", "s": "powerpyx"},
         {"t": "View and track challenges under Progress, then Challenges — a checkmark in the bottom right shows what is completed when you scroll over a challenge.", "s": "powerpyx"},
-        {"t": "Many complete naturally while working on the other trophies. Leave this for one of your last trophies, then pick the easiest and quickest of what remains.", "s": "powerpyx"}
+        {"t": "Many complete naturally while working on the other trophies. Leave this for one of your last trophies, then pick the easiest and quickest of what remains.", "s": "powerpyx"},
+        {"t": "KeenGamer confirms 80 challenges in total, agreeing with PowerPyx.", "s": "keengamer"},
+        {"t": "Push Square agrees any 50 of the 80 challenges earn the trophy and any 70 are needed for 100%.", "s": "pushsquare"}
       ]
     },
     "33": {
@@ -440,7 +486,8 @@
       "steps": [
         {"t": "Discover 100 vehicles. GTA VI has 557 vehicles at launch (cars, bikes, boats, helicopters, planes).", "s": "powerpyx"},
         {"t": "Use the WAiNK app from your phone (hold to open it instantly) and scan vehicles as they pass — stand at a busy road and scan everything. Scanning is enough; you do not need to drive them.", "s": "powerpyx"},
-        {"t": "You need 200 of the base-model vehicles scanned for the 100% checklist, so this trophy comes automatically on the way. Check your totals under Touchpad, then Progress, then Vehicles.", "s": "powerpyx"}
+        {"t": "You need 200 of the base-model vehicles scanned for the 100% checklist, so this trophy comes automatically on the way. Check your totals under Touchpad, then Progress, then Vehicles.", "s": "powerpyx"},
+        {"t": "KeenGamer confirms 557 vehicles at launch, agreeing with PowerPyx.", "s": "keengamer"}
       ]
     }
 ,
@@ -615,11 +662,12 @@
       "stage": 4,
       "chapter": null,
       "mission": null,
-      "when": "Unknown — no verified method yet; do not trust guides that state one as fact.",
+      "when": "Chapter 3 onward, after Credit Check — Lucia alone, escape on foot.",
       "rarity": 0.01,
       "steps": [
-        {"t": "The method is currently unknown. PowerPyx believes it is related to the Payday Loans store from the Prologue — possibly robbing it later again in a specific manner — located in Vice City, Little Cuba.", "s": "powerpyx"},
-        {"t": "This is disagreement #4 in Sources & audit: shown as PowerPyx's guess, not as a verified method. Do not trust any guide that states a method as fact.", "s": "powerpyx"}
+        {"t": "Go to the Payday Loans in Vice City, Little Cuba, alone as Lucia, after the Chapter 3 mission Credit Check — aim your weapon at the teller, break through the door and steal the money from all 3 cash drawers.", "s": "powerpyx"},
+        {"t": "Escape on foot — do not get in a vehicle. Run away until you leave the police search area; the trophy unlocks after you are far enough away.", "s": "powerpyx"},
+        {"t": "KeenGamer still lists this trophy as unconfirmed, while PowerPyx now gives the method above — this is disagreement #4 in Sources & audit, updated for v3.", "s": "keengamer"}
       ]
     }
 ,
@@ -657,7 +705,8 @@
         {"t": "First finish the Chapter 3 main mission Credit Check (Meet Raul's Crew). It unlocks the Dye Pack Jammer to launder marked bills.", "s": "powerpyx"},
         {"t": "Rob banks and Payday Loans and bring the marked bills to a fence — Yasmani in Vice City pays the most.", "s": "powerpyx"},
         {"t": "Deliver a total of $250,000 in marked bills to a fence. It counts across all robberies — you do not need to bring $250,000 at once.", "s": "powerpyx"},
-        {"t": "It comes naturally while you do all robberies for the 100% checklist. Bank vaults give up to $205,000 in a single robbery within a few minutes, but those only unlock after the Chapter 4 optional mission That's Where The Money Is….", "s": "powerpyx"}
+        {"t": "It comes naturally while you do all robberies for the 100% checklist. Bank vaults give up to $205,000 in a single robbery within a few minutes, but those only unlock after the Chapter 4 optional mission That's Where The Money Is….", "s": "powerpyx"},
+        {"t": "KeenGamer agrees Yasmani in Vice City pays the most for marked bills.", "s": "keengamer"}
       ]
     },
     "53": {
