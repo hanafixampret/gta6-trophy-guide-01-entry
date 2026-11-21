@@ -1,4 +1,4 @@
-# Build output (main.ts — MAKEFUN_OUTPUT_DIR=out)
 out/
-# Local logs
+node_modules/
+.DS_Store
 *.log

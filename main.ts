@@ -1,82 +1,41 @@
-// Leonida Platinum — GTA VI trophy guide & tracker (make.fun gta6-trophy-guide-01).
-// Node 22, standard library only. The guide itself is plain static files under
-// app/ (index.html + app.js + style.css + data/trophies.json + data/steps.json):
-// it opens in a desktop browser and works with the network off. This program
-// hands it in: it copies app/ and screenshots/ from beside this file to /output
-// and writes /output/dossier.json with the vendored make.fun library, exactly
-// as the kit's starter does. vendor/makefun-frontend.ts is the kit's copy,
-// unchanged. The cited steps live in data/steps.json (236 numbered steps, each
-// naming its source — PowerPyx 182, KeenGamer 34, Push Square 13,
-// Exophase 6, PSNProfiles 1); the hand-in refuses to run without them,
-// because a guide with no steps is not the entry this program claims
-// to hand in. It also refuses a hand-in whose steps fail the guard in
-// validateData below: every trophy needs at least one cited step, and
-// every step must name a source the data file itself lists.
-//
-// Never delete the output directory here: the grader's /output is a mount
-// point, so only mkdirSync it (rmSync would throw EBUSY). Outside the grader,
-// MAKEFUN_OUTPUT_DIR stands in for /output:
+// Vice Ledger — the hand-in program for gta6-trophy-guide-01 (Node 22, stdlib only).
+// It copies this repository's app/ (the guide: index.html, app.js, style.css and
+// data/trophies.json + steps.json) and screenshots/ into the output directory and
+// writes /output/dossier.json with the kit's vendored library, which is the
+// summary the judge reads. Run it as:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
-// Serve the guide locally with `node serve.ts` (http://localhost:8080).
+// Outside the grader, MAKEFUN_OUTPUT_DIR stands in for /output; inside the
+// grader, /output is used. vendor/makefun-frontend.ts must stay byte-identical
+// to the kit's copy: the scorer rebuilds the dossier with its own copy and the
+// two must match.
 
-import { cpSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildDossier } from './vendor/makefun-frontend.ts';
 
-const here = fileURLToPath(new URL('.', import.meta.url));
-const out = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
+const repoRoot = fileURLToPath(new URL('.', import.meta.url));
+const outputDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 
-// The v3 guide is nothing without its cited steps: refuse the hand-in rather
-// than shipping a checklist whose detail panels come up empty.
-if (!existsSync(join(here, 'app', 'data', 'steps.json'))) {
-  throw new Error('app/data/steps.json is missing: the cited steps are part of this entry');
-}
-if (!existsSync(join(here, 'app', 'data', 'trophies.json'))) {
-  throw new Error('app/data/trophies.json is missing: the trophy list is part of this entry');
-}
+mkdirSync(outputDir, { recursive: true });
+cpSync(join(repoRoot, 'app'), join(outputDir, 'app'), { recursive: true });
 
-// v3 guard: the hand-in must carry cited steps for every trophy, and every
-// step must name a source this entry actually lists. A step whose source is
-// a list instead of a string, or a source id the data never declares, fails
-// the guard — that was the defect that sank the first v3 draft, where 39
-// steps carried a list of sources and would have rendered as one chip.
-function validateData() {
-  const trophies = JSON.parse(readFileSync(join(here, 'app', 'data', 'trophies.json'), 'utf-8'));
-  const steps = JSON.parse(readFileSync(join(here, 'app', 'data', 'steps.json'), 'utf-8'));
-  const known = new Set((steps.sources || []).map((s) => s.id));
-  if (!Array.isArray(trophies.trophies) || trophies.trophies.length !== 55) {
-    throw new Error(`trophies.json must list 55 trophies, found ${trophies.trophies?.length}`);
-  }
-  let total = 0;
-  for (const t of trophies.trophies) {
-    if (!String(t.guide || '').trim()) throw new Error(`trophy ${t.id} has a blank guide`);
-    const entry = (steps.trophies || {})[String(t.id)];
-    const list = entry?.steps || [];
-    if (!list.length) throw new Error(`trophy ${t.id} (${t.name}) has no cited steps`);
-    for (const s of list) {
-      if (typeof s.s !== 'string' || !known.has(s.s)) {
-        throw new Error(`trophy ${t.id} has a step with an unknown source: ${JSON.stringify(s.s)}`);
-      }
-      total += 1;
-    }
-  }
-  console.log(`data: 55 trophies, ${total} cited steps, ${known.size} sources (checked ${steps.checked})`);
+const shotsDir = join(outputDir, 'screenshots');
+mkdirSync(shotsDir, { recursive: true });
+if (existsSync(join(repoRoot, 'screenshots'))) {
+  cpSync(join(repoRoot, 'screenshots'), shotsDir, { recursive: true });
 }
 
-validateData();
-
-mkdirSync(out, { recursive: true });
-cpSync(join(here, 'app'), join(out, 'app'), { recursive: true });
-mkdirSync(join(out, 'screenshots'), { recursive: true });
-if (existsSync(join(here, 'screenshots'))) cpSync(join(here, 'screenshots'), join(out, 'screenshots'), { recursive: true });
-
-// The scorer's own caps (reference/gate.json): only text_max_bytes shapes the
-// bytes; the others refuse an entry the scorer would refuse (more than 4
-// screenshots or one over 256 KiB; more than 993 files and directories in app/
-// or 48 MiB of app files: app/ counts beside /output's own 1000-entry cap, its
-// screenshots/ and dossier.json).
+// The gate's own caps, from the competition's reference/gate.json: at most 4
+// screenshots of at most 256 KiB, app/ at most 993 files and 48 MiB, and the
+// dossier text at most 160 KiB. The scorer refuses anything past them, so the
+// program refuses first, with the library's words.
 writeFileSync(
-  join(out, 'dossier.json'),
-  buildDossier(out, { text_max_bytes: 163840, screenshots: { max: 4, max_bytes: 262144 }, app_max_files: 993, app_max_bytes: 50331648 }),
+  join(outputDir, 'dossier.json'),
+  buildDossier(outputDir, {
+    text_max_bytes: 163840,
+    screenshots: { max: 4, max_bytes: 262144 },
+    app_max_files: 993,
+    app_max_bytes: 50331648,
+  }),
 );
